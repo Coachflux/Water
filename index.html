@@ -5,7 +5,7 @@
   <title>Aqua Connect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Reset and Base Styles */
+    /* Reset and base styles */
     * {
       margin: 0;
       padding: 0;
@@ -17,11 +17,11 @@
       background: linear-gradient(to bottom, #b3e5fc, #e1f5fe);
       overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      position: relative;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      position: relative;
     }
 
     /* Floating 3D Water Drops */
@@ -29,10 +29,12 @@
       position: absolute;
       background: radial-gradient(circle at top left, #b3e5fc, #81d4fa);
       border-radius: 50%;
-      box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 0.7),
-                  inset 4px 4px 10px rgba(0, 150, 255, 0.2),
-                  8px 8px 20px rgba(0, 0, 0, 0.1);
+      box-shadow:
+        inset -4px -4px 10px rgba(255, 255, 255, 0.7),
+        inset 4px 4px 10px rgba(0, 150, 255, 0.2),
+        8px 8px 20px rgba(0, 0, 0, 0.1);
       animation: float 12s linear infinite;
+      z-index: 0;
     }
 
     .drop1 { width: 50px; height: 50px; top: 15%; left: 20%; animation-delay: 0s; }
@@ -47,26 +49,29 @@
       100% { transform: translateY(-250px); opacity: 0; }
     }
 
-    /* Neumorphic Drop Container with Logo */
-    .drop-container {
-      width: 180px;
-      height: 180px;
-      background: #e0f7fa;
-      border-radius: 50%;
-      box-shadow: 15px 15px 30px #b2ebf2, -15px -15px 30px #ffffff;
+    /* Water Drop Styled 3D Image */
+    .logo-drop {
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle at top, #81d4fa, #03a9f4);
+      border-radius: 50% 50% 60% 60% / 60% 60% 40% 40%;
+      box-shadow: 
+        inset -5px -5px 12px rgba(255, 255, 255, 0.7),
+        inset 5px 5px 12px rgba(0, 150, 255, 0.2),
+        12px 12px 25px rgba(0, 0, 0, 0.1),
+        -8px -8px 15px rgba(255, 255, 255, 0.6);
       display: flex;
       justify-content: center;
       align-items: center;
       margin-bottom: 25px;
-      position: relative;
       z-index: 2;
     }
 
-    .drop-container img {
-      width: 100px;
-      height: 100px;
+    .logo-drop img {
+      width: 80px;
+      height: 80px;
       object-fit: contain;
-      border-radius: 50%;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
     }
 
     /* Headers */
@@ -87,55 +92,45 @@
       z-index: 2;
     }
 
-    /* Neumorphic 3D Get Started Button */
+    /* Water Drop Neumorphic Button */
     .get-started {
-      padding: 15px 35px;
-      background: #e0f7fa;
-      color: #01579b;
+      padding: 15px 40px;
+      background: radial-gradient(circle at top left, #0288d1, #03a9f4);
+      color: white;
       border: none;
-      border-radius: 40px;
+      border-radius: 50% 50% 60% 60% / 60% 60% 40% 40%;
       font-size: 1em;
       font-weight: bold;
-      box-shadow: 10px 10px 20px #b2ebf2, -10px -10px 20px #ffffff;
-      transition: all 0.3s ease;
+      box-shadow:
+        10px 10px 20px #0277bd,
+        -10px -10px 20px #4fc3f7,
+        inset -3px -3px 6px rgba(255, 255, 255, 0.5),
+        inset 3px 3px 6px rgba(0, 150, 255, 0.3);
       cursor: pointer;
+      transition: all 0.3s ease;
       z-index: 2;
     }
 
     .get-started:hover {
-      box-shadow: inset 5px 5px 12px #b2ebf2, inset -5px -5px 12px #ffffff;
-      color: #0288d1;
+      background: radial-gradient(circle at top left, #039be5, #29b6f6);
+      box-shadow:
+        inset 4px 4px 10px rgba(0, 150, 255, 0.3),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.4),
+        6px 6px 12px rgba(0, 0, 0, 0.1);
     }
 
     @media (max-width: 600px) {
-      .title {
-        font-size: 2em;
-      }
-
-      .subtitle {
-        font-size: 1em;
-      }
-
-      .drop-container {
-        width: 140px;
-        height: 140px;
-      }
-
-      .drop-container img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .get-started {
-        padding: 12px 25px;
-        font-size: 0.95em;
-      }
+      .title { font-size: 2em; }
+      .subtitle { font-size: 1em; }
+      .logo-drop { width: 120px; height: 120px; }
+      .logo-drop img { width: 60px; height: 60px; }
+      .get-started { padding: 12px 30px; font-size: 0.95em; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Water Drops -->
+  <!-- Floating Background Drops -->
   <div class="drop drop1"></div>
   <div class="drop drop2"></div>
   <div class="drop drop3"></div>
@@ -143,23 +138,23 @@
   <div class="drop drop5"></div>
   <div class="drop drop6"></div>
 
-  <!-- Centered Water Drop Logo Container -->
-  <div class="drop-container">
-    <img src="img/drop/water1.png" alt="Water Drop Logo"> <!-- Replace with your own logo -->
+  <!-- Water Drop 3D Image -->
+  <div class="logo-drop">
+    <img src=".img/drop/water1.png" alt="Logo"> <!-- Replace with your image -->
   </div>
 
   <!-- Header Text -->
   <div class="title">AQUA CONNECT</div>
   <div class="subtitle">Find Water Vendors Near You</div>
 
-  <!-- Neumorphic Button -->
+  <!-- Neumorphic Water Drop Button -->
   <button class="get-started" onclick="goToNextPage()">Get Started</button>
 
   <script>
     function goToNextPage() {
-      // Replace with your destination
-      window.location.href = "nextpage.html";
+      window.location.href = "nextpage.html"; // Update destination if needed
     }
   </script>
+
 </body>
 </html>
