@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aqua Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to bottom, #b3e5fc, #e1f5fe);
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 20px;
+    }
+
+    .drop {
+      position: absolute;
+      background: radial-gradient(circle at top left, #b3e5fc, #81d4fa);
+      border-radius: 50%;
+      box-shadow:
+        inset -4px -4px 10px rgba(255, 255, 255, 0.7),
+        inset 4px 4px 10px rgba(0, 150, 255, 0.2),
+        8px 8px 20px rgba(0, 0, 0, 0.1);
+      animation: float 12s linear infinite;
+      z-index: 0;
+    }
+
+    .drop1 { width: 50px; height: 50px; top: 15%; left: 20%; animation-delay: 0s; }
+    .drop2 { width: 80px; height: 80px; top: 50%; left: 70%; animation-delay: 3s; }
+    .drop3 { width: 30px; height: 30px; top: 75%; left: 40%; animation-delay: 5s; }
+    .drop4 { width: 100px; height: 100px; top: 35%; left: 10%; animation-delay: 2s; }
+    .drop5 { width: 60px; height: 60px; top: 65%; left: 80%; animation-delay: 4s; }
+    .drop6 { width: 45px; height: 45px; top: 20%; left: 55%; animation-delay: 6s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-250px); opacity: 0; }
+    }
+
+    .logo-drop {
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle at top, #81d4fa, #03a9f4);
+      border-radius: 50%;
+      box-shadow: 
+        inset -5px -5px 12px rgba(255, 255, 255, 0.7),
+        inset 5px 5px 12px rgba(0, 150, 255, 0.2),
+        12px 12px 25px rgba(0, 0, 0, 0.1),
+        -8px -8px 15px rgba(255, 255, 255, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 25px;
+      z-index: 2;
+    }
+
+    .logo-drop img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5));
+    }
+
+    .title {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #01579b;
+      margin-bottom: 10px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      color: #0277bd;
+      margin-bottom: 20px;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .small-header {
+      font-size: 1em;
+      color: #01579b;
+      margin: 10px 0 10px 0;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .get-started,
+    .resident-btn,
+    .vendor-btn {
+      padding: 15px 35px;
+      border: none;
+      border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow:
+        10px 10px 20px rgba(0,0,0,0.1),
+        -10px -10px 20px rgba(255,255,255,0.6),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.5),
+        inset 3px 3px 6px rgba(0, 150, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+      margin-bottom: 10px;
+    }
+
+    .get-started {
+      background: radial-gradient(circle at top left, #0288d1, #03a9f4);
+      color: white;
+    }
+
+    .get-started:hover {
+      background: radial-gradient(circle at top left, #039be5, #29b6f6);
+    }
+
+    .resident-btn {
+      background: radial-gradient(circle at top left, #4fc3f7, #0288d1);
+      color: white;
+    }
+
+    .resident-btn:hover {
+      background: radial-gradient(circle at top left, #03a9f4, #01579b);
+    }
+
+    .vendor-btn {
+      background: radial-gradient(circle at top, #ffffff, #e0f7fa);
+      color: #0277bd;
+    }
+
+    .vendor-btn:hover {
+      background: radial-gradient(circle at top, #e1f5fe, #b2ebf2);
+    }
+
+    @media (max-width: 600px) {
+      .title { font-size: 2em; }
+      .subtitle, .small-header { font-size: 1em; }
+      .logo-drop { width: 120px; height: 120px; }
+      .logo-drop img { width: 60px; height: 60px; }
+      button { padding: 12px 25px; font-size: 0.9em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Water Drops -->
+  <div class="drop drop1"></div>
+  <div class="drop drop2"></div>
+  <div class="drop drop3"></div>
+  <div class="drop drop4"></div>
+  <div class="drop drop5"></div>
+  <div class="drop drop6"></div>
+
+  <!-- Water Drop Logo -->
+  <div class="logo-drop">
+    <img src="img/drops/water1.png" alt="Logo"> <!-- Replace with your image path -->
+  </div>
+
+  <!-- Header -->
+  <div class="title">AQUA CONNECT</div>
+  <div class="subtitle">Find Water Vendors Near You</div>
+
+  <!-- Get Started Button -->
+  <button class="get-started" onclick="goToLogin()">Get Started</button>
+
+  <!-- Resident Section -->
+  <div class="small-header">Are You A Resident? Order, Track, And Receive Clean Water With Ease</div>
+  <button class="resident-btn" onclick="goToResident()">Resident</button>
+
+  <!-- Vendor Section -->
+  <div class="small-header">Are You A Vendor? Manage Orders, Reach Residents, Grow Your Business</div>
+  <button class="vendor-btn" onclick="goToVendor()">Vendor</button>
+
+  <script>
+    function goToLogin() {
+      window.location.href = "login.html";
+    }
+
+    function goToResident() {
+      window.location.href = "resident.html"; // Update as needed
+    }
+
+    function goToVendor() {
+      window.location.href = "vendor.html"; // Update as needed
+    }
+  </script>
+
+</body>
+</html>
