@@ -73,6 +73,13 @@
     transform: scale(0);
     animation: ripple-effect 5s ease-out forwards;
     pointer-events: none;
+    filter: drop-shadow(4px 4px 10px #fff);    
+    text-shadow: -2px -2px 5px #fff;    
+    box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.05),    
+             15px 25px 10px rgba(0, 0, 0, 0.05),    
+             15px 20px 20px rgba(0, 0, 0, 0.05),    
+             inset -10px -10px 15px rgba(225, 225, 225, 0.9);    
+             color: #333;
   }
 
   @keyframes ripple-effect {
