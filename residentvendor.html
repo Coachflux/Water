@@ -226,6 +226,9 @@
   <div class="drop drop9"></div>
   <div class="drop drop10"></div>
 
+	<!-- Ripple Container -->
+<div class="ripple-container"></div>
+	
   <!-- Water Drop Logo -->
   <div class="logo-drop">
     <img src="img/drops/water1.png" alt="Logo"> <!-- Replace with your image path -->
@@ -243,6 +246,7 @@
   <div class="small-header">Are You A Vendor? Manage Orders, Reach Residents, Grow Your Business</div>
   <button class="vendor-btn" onclick="goToVendor()">Vendor</button>
 
+	/* JavaScript */
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
   <script>
@@ -250,10 +254,17 @@
       $(".ripple-container").ripples({
         resolution: 300,
         perturbance: 0.03,
-        interactive: true,
         dropRadius: 20
       });
-    });	
+
+      // On click, zoom all background drops
+      $(document).on('pointerdown', function () {
+        $('.drop').addClass('zoomed');
+        setTimeout(() => {
+          $('.drop').removeClass('zoomed');
+        }, 700);
+      });
+    });
   
     function goToLogin() {
       window.location.href = "login.html";
