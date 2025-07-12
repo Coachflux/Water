@@ -255,17 +255,9 @@
     $(document).ready(function(){
       $(".ripple-container").ripples({
         resolution: 300,
-        perturbance: 0.5,
-	interactive: true,   
+        perturbance: 0.03,
+        interactive: true,
         dropRadius: 20
-      });
-
-      // On click, zoom all background drops
-      $(document).on('pointerdown', function () {
-        $('.drop').addClass('zoomed');
-        setTimeout(() => {
-          $('.drop').removeClass('zoomed');
-        }, 700);
       });
     });
   
