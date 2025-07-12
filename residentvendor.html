@@ -29,6 +29,23 @@
       z-index: 0;
     }
 
+@keyframes ultraRipple {
+    0% {
+      transform: scale(0.5);
+      opacity: 0.8;
+      filter: blur(0.5px);
+    }
+    50% {
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+    100% {
+      transform: scale(50);
+      opacity: 0;
+      filter: blur(2px);
+    }
+  }
+    
     /* Floating 3D Water Drops */
     .drop {
       position: absolute;
