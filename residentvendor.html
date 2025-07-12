@@ -53,13 +53,23 @@
       100% { transform: translateY(-250px); opacity: 0; }
     }
 
-/* Ripple effect background container */
+    /* Ripple canvas is on top */
     .ripple-container {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
+      background: transparent;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Background gradient */
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
       background: linear-gradient(to bottom, #b3e5fc, #e1f5fe);
       z-index: 0;
     }
