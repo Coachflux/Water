@@ -199,7 +199,7 @@
 </head>
 <body>
 
-  <div class="ripple-container" id=""></div>
+  <div class="ripple-container"></div>
 
   <!-- Floating Water Drops -->
   <div class="drop drop1"></div>
@@ -242,20 +242,6 @@
     function goToVendor() {
       window.location.href = "login.html"; // Update as needed
     }
-    
-  const rippleContainer = document.getElementById('ripple-container');
-
-  document.body.addEventListener('click', function (e) {
-    const ripple = document.createElement('div');
-    ripple.className = 'ripple';
-    ripple.style.left = `${e.clientX}px`;
-    ripple.style.top = `${e.clientY}px`;
-    rippleContainer.appendChild(ripple);
-
-    setTimeout(() => {
-      ripple.remove();
-    }, 5000);
-  });
 </script>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
