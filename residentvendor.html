@@ -231,6 +231,22 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
   <script>
+  const rippleContainer = document.getElementById('ripple-container');
+
+  document.body.addEventListener('pointerdown', function (e) {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    ripple.style.left = `${e.clientX - 10}px`;
+    ripple.style.top = `${e.clientY - 10}px`;
+    rippleContainer.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 5000);
+  });
+</script>
+
+  <script>
     $(document).ready(function(){
       $(".ripple-container").ripples({
         resolution: 300,
