@@ -229,7 +229,18 @@
   <div class="small-header">Are You A Vendor? Manage Orders, Reach Residents, Grow Your Business</div>
   <button class="vendor-btn" onclick="goToVendor()">Vendor</button>
 
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
   <script>
+    $(document).ready(function(){
+      $(".ripple-container").ripples({
+        resolution: 300,
+        perturbance: 0.03,
+        interactive: true,
+        dropRadius: 20
+      });
+    });	
+  
     function goToLogin() {
       window.location.href = "login.html";
     }
