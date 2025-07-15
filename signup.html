@@ -140,7 +140,7 @@
     
     .verify {
       font-size: 0.9em;
-      color: #0288d1;
+      color: #ffffff;
       text-decoration: underline;
       cursor: pointer;
       margin-bottom: 25px;
@@ -209,13 +209,14 @@
     <input type="name" class="input" placeholder="Full Name" />
     <input type="email" class="input" placeholder="Email" />
     <input type="password" class="input" placeholder="Password" />
-    <button class="login-btn">Sign Up</button>
-<div class="verify">
+    <div class="verify">
       <span onclick="goToVerifyId()">Verify Identity</span>
 </div>
+    <button class="login-btn">Sign Up</button>
+
 
     <div class="signup-text">
-      Already have an account? <span onclick="goToSignUp()">Login</span>
+      Already have an account? <span onclick="goToLogin()">Login</span>
     <span onclick="goToVerification()">Verify</span>
     </div>
     </div>
@@ -233,6 +234,9 @@
   <script>
     function goToVerifyId() {
       window.location.href = "identity.html"; // update if needed
+    }
+    function goToLogin() {
+      window.location.href = "login.html"; // update if needed
     }
     function goToVerification() {
       window.location.href = "verification.html"; // update if needed
