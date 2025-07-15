@@ -25,6 +25,79 @@
       padding: 20px;
     }
 
+    /* Ripple effect background container */
+    .ripple-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(to bottom, #b3e5fc, #e1f5fe);
+      z-index: 0;
+    }
+
+.ripple {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(173,216,230,0.5) 0%, rgba(0,191,255,0.2) 40%, transparent 70%);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ultraRipple 5s ease-out forwards;
+    filter: blur(1px);
+    resolution: 200;
+    perturbance: .05;
+    interactive: true;
+    dropRadius: 20;
+  }
+    
+@keyframes ultraRipple {
+    0% {
+      transform: scale(0.5);
+      opacity: 0.8;
+      filter: blur(0.5px);
+    }
+    50% {
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+    100% {
+      transform: scale(50);
+      opacity: 0;
+      filter: blur(2px);
+    }
+  }
+    
+    /* Floating 3D Water Drops */
+    .drop {
+      position: absolute;
+      background: radial-gradient(circle at top left, #b3e5fc, #81d4fa);
+      border-radius: 50%;
+      box-shadow:
+        inset -4px -4px 10px rgba(255, 255, 255, 0.7),
+        inset 4px 4px 10px rgba(0, 150, 255, 0.2),
+        8px 8px 20px rgba(0, 0, 0, 0.1);
+      animation: float 12s linear infinite;
+      z-index: 1;
+    }
+
+    .drop1 { width: 50px; height: 50px; top: 15%; left: 20%; animation-delay: 0s; }
+    .drop2 { width: 80px; height: 80px; top: 50%; left: 70%; animation-delay: 3s; }
+    .drop3 { width: 30px; height: 30px; top: 75%; left: 40%; animation-delay: 5s; }
+    .drop4 { width: 100px; height: 100px; top: 35%; left: 10%; animation-delay: 2s; }
+    .drop5 { width: 60px; height: 60px; top: 65%; left: 80%; animation-delay: 4s; }
+    .drop6 { width: 45px; height: 45px; top: 20%; left: 55%; animation-delay: 6s; }
+    .drop7 { width: 10px; height: 10px; top: 20%; left: 80%; animation-delay: 9s; }
+    .drop8 { width: 5px; height: 5px; top: 25%; left: 50%; animation-delay: 10s; }
+    .drop9 { width: 20px; height: 20px; top: 40%; left: 90%; animation-delay: 8s; }
+    .drop10 { width: 25px; height: 25px; top: 30%; left: 30%; animation-delay: 7s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-250px); opacity: 0; }
+    }
+      
+
     .header {
       display: flex;
       align-items: center;
@@ -189,6 +262,21 @@
     <h2>Identity Verification</h2>
   </div>
 
+<!-- Main Container -->
+  <div class="ripple-container" id="ripple-container"></div>
+
+  <!-- Floating Water Drops -->
+  <div class="drop drop1"></div>
+  <div class="drop drop2"></div>
+  <div class="drop drop3"></div>
+  <div class="drop drop4"></div>
+  <div class="drop drop5"></div>
+  <div class="drop drop6"></div>
+  <div class="drop drop7"></div>
+  <div class="drop drop8"></div>
+  <div class="drop drop9"></div>
+  <div class="drop drop10"></div>
+
   <!-- Instructions -->
   <div class="instruction">
     <h4>You Need To Pass This Verification Process</h4>
@@ -252,7 +340,66 @@
   </div>
 
   <!-- JavaScript -->
+  <!-- Ripple Plugin -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
   <script>
+  const rippleContainer = document.getElementById('ripple-container');
+
+  document.body.addEventListener('pointerdown', function (e) {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    ripple.style.left = `${e.clientX - 10}px`;
+    ripple.style.top = `${e.clientY - 10}px`;
+    rippleContainer.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 5000);
+  });
+
+    $(document).ready(function(){
+      $(".ripple-container").ripples({
+        resolution: 300,
+        perturbance: .05,
+        interactive: true,
+        dropRadius: 20
+      });
+    });
+
+    
+    function goToSignup() {
+      window.location.href = "signup.html";
+    }
+
+    function resendCode() {
+      alert("Verification code resent.");
+    }
+
+    function verifyCode() {
+      alert("Code verified.");
+    }
+
+    // Timer
+    let time = 300; // 5 mins
+    const timerEl = document.getElementById("timer");
+    const updateTimer = () => {
+      let mins = Math.floor(time / 60);
+      let secs = time % 60;
+      timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      if (time > 0) time--;
+    };
+    setInterval(updateTimer, 1000);
+
+    // Apply ripple to top and bottom
+    $(document).ready(function(){
+      $(".ripple-top, .ripple-bottom").ripples({
+        resolution: 256,
+        perturbance: 0.04
+      });
+    });
+    
+    
     function goBack() {
       window.history.back();
     }
