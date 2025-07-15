@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Identity Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --blue: #03a9f4;
+      --light: #e1f5fe;
+      --dark: #0277bd;
+      --shadow-light: rgba(255,255,255,0.6);
+      --shadow-dark: rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #b3e5fc, #e0f7fa);
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      flex: 1;
+      text-align: center;
+      color: var(--dark);
+    }
+
+    .back-arrow {
+      font-size: 1.8em;
+      color: var(--blue);
+      cursor: pointer;
+    }
+
+    .instruction {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .instruction h4 {
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+
+    .instruction p {
+      font-size: 0.9em;
+      color: #444;
+    }
+
+    .verification-step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .verification-step::before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background: #ccc;
+      left: 18px;
+      top: 30px;
+      bottom: -20px;
+      z-index: 0;
+    }
+
+    .verification-step:last-child::before {
+      display: none;
+    }
+
+    .check-icon {
+      width: 35px;
+      height: 35px;
+      background: radial-gradient(circle at top left, #b3e5fc, #81d4fa);
+      border-radius: 50%;
+      box-shadow:
+        inset -4px -4px 8px var(--shadow-light),
+        inset 4px 4px 8px var(--shadow-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .check-icon.checked {
+      background: #4caf50;
+      color: white;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content span {
+      font-weight: bold;
+      color: #01579b;
+    }
+
+    .step-content input, .step-content button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      background: var(--light);
+      box-shadow:
+        inset -4px -4px 8px var(--shadow-light),
+        inset 4px 4px 8px var(--shadow-dark);
+    }
+
+    .icon-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px;
+      background: radial-gradient(circle at top left, #81d4fa, #03a9f4);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      box-shadow:
+        5px 5px 10px var(--shadow-dark),
+        -5px -5px 10px var(--shadow-light);
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #fff;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow:
+        8px 8px 20px rgba(0, 0, 0, 0.2),
+        -8px -8px 20px rgba(255, 255, 255, 0.6);
+      text-align: center;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .popup.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup img {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+
+    .popup h3 {
+      color: #2e7d32;
+    }
+
+    .done-btn {
+      margin-top: 10px;
+      padding: 10px 30px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="back-arrow" onclick="goBack()">&#8592;</div>
+    <h2>Identity Verification</h2>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instruction">
+    <h4>You Need To Pass This Verification Process</h4>
+    <p>Based on the documents and information provided, we would be able to verify your identity.</p>
+  </div>
+
+  <!-- Verification Steps -->
+  <div class="verification-step" id="step-video">
+    <div class="check-icon" id="check-video">✔</div>
+    <div class="step-content">
+      <span>Upload a Live Video</span><br>
+      <div class="icon-btn" onclick="startVideo()">🎥</div>
+    </div>
+  </div>
+
+  <div class="verification-step" id="step-id">
+    <div class="check-icon" id="check-id">✔</div>
+    <div class="step-content">
+      <span>Upload Your ID</span><br>
+      <div class="icon-btn" onclick="markStepDone('check-id')">🪪</div>
+    </div>
+  </div>
+
+  <div class="verification-step" id="step-cert">
+    <div class="check-icon" id="check-cert">✔</div>
+    <div class="step-content">
+      <span>Upload Water Source Certificate</span><br>
+      <div class="icon-btn" onclick="markStepDone('check-cert')">📄</div>
+    </div>
+  </div>
+
+  <div class="verification-step">
+    <div class="check-icon" id="check-biz">✔</div>
+    <div class="step-content">
+      <span>Business Registration</span>
+      <input type="text" placeholder="Add your business registration number" oninput="markStepDone('check-biz')">
+    </div>
+  </div>
+
+  <div class="verification-step">
+    <div class="check-icon" id="check-tank">✔</div>
+    <div class="step-content">
+      <span>Tank Details</span>
+      <input type="text" placeholder="Number of your vehicle/tank" oninput="markStepDone('check-tank')">
+    </div>
+  </div>
+
+  <div class="verification-step">
+    <div class="check-icon" id="check-zone">✔</div>
+    <div class="step-content">
+      <span>Service Area (Zone)</span>
+      <input type="text" placeholder="Zonal position" oninput="markStepDone('check-zone')">
+    </div>
+  </div>
+
+  <!-- Success Popup -->
+  <div class="popup" id="successPopup">
+    <img src="https://i.imgur.com/3XjYvsz.png" alt="Success Water Drop">
+    <h3>Identity Verification Successful</h3>
+    <button class="done-btn" onclick="closePopup()">Done</button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function markStepDone(id) {
+      const icon = document.getElementById(id);
+      icon.classList.add("checked");
+
+      // Check if all steps are complete
+      const all = ['check-video','check-id','check-cert','check-biz','check-tank','check-zone'];
+      if (all.every(i => document.getElementById(i).classList.contains('checked'))) {
+        document.getElementById("successPopup").classList.add("show");
+      }
+    }
+
+    function closePopup() {
+      document.getElementById("successPopup").classList.remove("show");
+    }
+
+    function startVideo() {
+      alert("Simulating camera. Face detection will be simulated.\nPlease face the front camera.");
+      let count = 5;
+      const interval = setInterval(() => {
+        if (count === 0) {
+          clearInterval(interval);
+          alert("Video Accepted.");
+          markStepDone('check-video');
+        } else {
+          console.log("Countdown: " + count);
+          count--;
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
