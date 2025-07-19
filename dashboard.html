@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Neumorphism Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e0e5ec;
+      padding-top: 300px;
+    }
+
+    .fixed-card {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #1e90ff;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .profile-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .profile-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: inset 4px 4px 10px #b8b9be, inset -4px -4px 10px #ffffff;
+      cursor: pointer;
+    }
+
+    .popup {
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      background: #e0e5ec;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 5px 5px 15px #b8b9be, -5px -5px 15px #ffffff;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup input {
+      display: none;
+    }
+
+    .popup button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      border: none;
+      background: #1e90ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .notif-icon {
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .balance-container {
+      text-align: center;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .balance-container h4 {
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+
+    .balance-container h1 {
+      font-size: 30px;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .action-box {
+      width: 30%;
+      padding: 15px;
+      background: #e0e5ec;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 5px 5px 15px #b8b9be, -5px -5px 15px #ffffff;
+      cursor: pointer;
+    }
+
+    .action-box i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 5px;
+      color: #1e90ff;
+    }
+
+    .toggle-section {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px;
+    }
+
+    .toggle-box {
+      width: 45%;
+      padding: 20px;
+      text-align: center;
+      border-radius: 20px;
+      background: #e0e5ec;
+      box-shadow: 5px 5px 15px #b8b9be, -5px -5px 15px #ffffff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .toggle-box.active {
+      background: #b3d9ff;
+      box-shadow: inset 5px 5px 10px #9fc2e2, inset -5px -5px 10px #cce9ff;
+    }
+
+    .toggle-box img {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 10px;
+    }
+
+    .info-card {
+      margin: 20px;
+      padding: 20px;
+      border-radius: 20px;
+      background: #e0e5ec;
+      box-shadow: 5px 5px 15px #b8b9be, -5px -5px 15px #ffffff;
+    }
+
+    .info-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .info-content img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .info-content .details {
+      flex: 1;
+    }
+
+    .details h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .details .rating {
+      color: #ffa500;
+    }
+
+    .details .street {
+      font-size: 14px;
+      color: gray;
+    }
+
+    .info-card button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      background: #1e90ff;
+      border: none;
+      border-radius: 15px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fixed-card">
+    <div class="profile-container">
+      <div>
+        <img id="profileImg" src="https://via.placeholder.com/60" alt="Profile" class="profile-img">
+        <div class="popup" id="uploadPopup">
+          <label for="fileInput">Choose image</label>
+          <input type="file" id="fileInput" accept="image/*">
+          <button onclick="saveImage()">Edit Image</button>
+        </div>
+      </div>
+      <div class="notif-icon">🔔</div>
+    </div>
+
+    <div class="balance-container">
+      <h4>Balance</h4>
+      <h1>$20,000</h1>
+    </div>
+
+    <div class="action-buttons">
+      <div class="action-box"><i>➕</i>Top-Up</div>
+      <div class="action-box"><i>💸</i>Withdraw</div>
+      <div class="action-box"><i>🔋</i>Recharge</div>
+    </div>
+  </div>
+
+  <div class="toggle-section">
+    <div class="toggle-box active" id="vendorBox">
+      <img src="https://via.placeholder.com/40" alt="Vendor">
+      <div>Vendors</div>
+    </div>
+    <div class="toggle-box" id="buyerBox">
+      <img src="https://via.placeholder.com/40" alt="Buyer">
+      <div>Buyers</div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-content">
+      <img src="https://via.placeholder.com/60" alt="Person">
+      <div class="details">
+        <h4>John Doe</h4>
+        <div class="rating">⭐ 4.5</div>
+        <div class="street">Market Street</div>
+      </div>
+    </div>
+    <button>View Profile</button>
+  </div>
+
+  <script>
+    // Show upload popup
+    document.getElementById('profileImg').addEventListener('click', () => {
+      const popup = document.getElementById('uploadPopup');
+      popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Save uploaded image to localStorage
+    function saveImage() {
+      const input = document.getElementById('fileInput');
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = function () {
+        const imgData = reader.result;
+        localStorage.setItem('profileImg', imgData);
+        document.getElementById('profileImg').src = imgData;
+        document.getElementById('uploadPopup').style.display = 'none';
+      };
+      if (file) reader.readAsDataURL(file);
+    }
+
+    // Load saved image
+    window.onload = function () {
+      const savedImg = localStorage.getItem('profileImg');
+      if (savedImg) {
+        document.getElementById('profileImg').src = savedImg;
+      }
+    };
+
+    // Toggle active vendor/buyer
+    const vendorBox = document.getElementById('vendorBox');
+    const buyerBox = document.getElementById('buyerBox');
+
+    vendorBox.addEventListener('click', () => {
+      vendorBox.classList.add('active');
+      buyerBox.classList.remove('active');
+    });
+
+    buyerBox.addEventListener('click', () => {
+      buyerBox.classList.add('active');
+      vendorBox.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
