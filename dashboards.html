@@ -213,12 +213,13 @@
 
   <div class="profile-card">
     <div class="profile-row">
+      <img src="https://via.placeholder.com/50" class="user-img" id="userImage" />
       <div class="popup" id="uploadPopup">
           <label for="fileInput">Choose image</label>
           <input type="file" id="fileInput" accept="image/*">
           <button onclick="saveImage()">Edit Image</button>
         </div>
-      <img src="https://via.placeholder.com/50" class="user-img" id="userImage" />
+      
       <i class="fas fa-bell notification-icon"></i>
     </div>
     <div class="username">Welcome, John Doe</div>
@@ -250,5 +251,48 @@
     </div>
   </div>
 
+  <script>
+    // Show upload popup
+    document.getElementById('profileImg').addEventListener('click', () => {
+      const popup = document.getElementById('uploadPopup');
+      popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Save uploaded image to localStorage
+    function saveImage() {
+      const input = document.getElementById('fileInput');
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = function () {
+        const imgData = reader.result;
+        localStorage.setItem('profileImg', imgData);
+        document.getElementById('profileImg').src = imgData;
+        document.getElementById('uploadPopup').style.display = 'none';
+      };
+      if (file) reader.readAsDataURL(file);
+    }
+
+    // Load saved image
+    window.onload = function () {
+      const savedImg = localStorage.getItem('profileImg');
+      if (savedImg) {
+        document.getElementById('profileImg').src = savedImg;
+      }
+    };
+
+    // Toggle active vendor/buyer
+    const vendorBox = document.getElementById('vendorBox');
+    const buyerBox = document.getElementById('buyerBox');
+
+    vendorBox.addEventListener('click', () => {
+      vendorBox.classList.add('active');
+      buyerBox.classList.remove('active');
+    });
+
+    buyerBox.addEventListener('click', () => {
+      buyerBox.classList.add('active');
+      vendorBox.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
