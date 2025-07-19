@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neumorphism Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #e0f7fa;
+      overflow-x: hidden;
+    }
+
+    .profile-card {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(145deg, #6ec6ff, #2196f3);
+      padding: 20px;
+      border-radius: 0 0 20px 20px;
+      box-shadow: inset 4px 4px 8px rgba(0,0,0,0.1), inset -4px -4px 8px rgba(255,255,255,0.2);
+      z-index: 1000;
+    }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .user-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .notification-icon {
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .username {
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .balance {
+      text-align: center;
+      color: white;
+      margin-top: 15px;
+    }
+
+    .balance h4 {
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    .balance h2 {
+      font-size: 26px;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .action {
+      background: #e0f7fa;
+      border-radius: 20px;
+      width: 90px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 4px 4px 10px #b3ebf5, -4px -4px 10px #ffffff;
+    }
+
+    .action i {
+      font-size: 20px;
+      margin-bottom: 5px;
+      color: #2196f3;
+    }
+
+    .action span {
+      font-size: 12px;
+    }
+
+    .section {
+      margin-top: 260px;
+      padding: 20px;
+    }
+
+    .vendors-buyers {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .vb-box {
+      width: 48%;
+      padding: 20px;
+      border-radius: 20px;
+      background: #e0f7fa;
+      box-shadow: 4px 4px 10px #b3ebf5, -4px -4px 10px #ffffff;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .vb-box.active {
+      background: #b3e5fc;
+      box-shadow: inset 4px 4px 10px #81d4fa, inset -4px -4px 10px #ffffff;
+    }
+
+    .vb-box img {
+      width: 40px;
+      margin-bottom: 10px;
+    }
+
+    .listing {
+      background: #e0f7fa;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 4px 4px 10px #b3ebf5, -4px -4px 10px #ffffff;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .listing img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .listing .info {
+      flex: 1;
+    }
+
+    .listing .info h4 {
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .listing .info .rating {
+      font-size: 14px;
+      color: #fbc02d;
+    }
+
+    .listing .info .location {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .listing button {
+      background: #b3e5fc;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 6px #90caf9;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="profile-card">
+    <div class="profile-row">
+      <img src="https://via.placeholder.com/50" class="user-img" id="userImage" />
+      <i class="fas fa-bell notification-icon"></i>
+    </div>
+    <div class="username">Welcome, John Doe</div>
+    <div class="balance">
+      <h4>Balance</h4>
+      <h2>$20,000</h2>
+    </div>
+    <div class="actions">
+      <div class="action"><i class="fas fa-plus-circle"></i><span>Top-Up</span></div>
+      <div class="action"><i class="fas fa-download"></i><span>Withdraw</span></div>
+      <div class="action"><i class="fas fa-bolt"></i><span>Recharge</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="vendors-buyers">
+      <div class="vb-box active"><img src="https://via.placeholder.com/40"><div>Vendors</div></div>
+      <div class="vb-box"><img src="https://via.placeholder.com/40"><div>Buyers</div></div>
+    </div>
+
+    <div class="listing">
+      <img src="https://via.placeholder.com/50" />
+      <div class="info">
+        <h4>Company A</h4>
+        <div class="rating">★★★★☆</div>
+        <div class="location">123 Street Name</div>
+      </div>
+      <button>View</button>
+    </div>
+  </div>
+
+</body>
+</html>
